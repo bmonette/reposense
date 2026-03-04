@@ -11,16 +11,6 @@
 from pathlib import Path
 
 
-def scan_directory(path, ignore_pattern):
-
-    '''
-    Walks the folder and filters ignored paths.
-    Gathers file info and returns the collected data.
-    '''
-
-    pass
-
-
 def should_ignore(path, ignore_patterns):
 
     '''
@@ -39,6 +29,16 @@ def collect_file_info(file_path):
     '''
 
     pass
+
+
+def scan_directory(path, ignore_pattern):
+
+    '''
+    Walks the folder and filters ignored paths.
+    Gathers file info and returns the collected data.
+    '''
+
+    root_directory = Path(path)
 
 
 def summarize_extensions(files):
