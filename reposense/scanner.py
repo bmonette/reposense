@@ -93,7 +93,12 @@ def collect_file_info(file_path):
         size      - size in bytes (int)
     """
 
-    pass
+    return {
+        "path": file_path.resolve(),
+        "name": file_path.name,
+        "extension": file_path.suffix.lower(),
+        "size": file_path.stat().st_size,
+    }
 
 
 def summarize_extensions(files):
