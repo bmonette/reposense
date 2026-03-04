@@ -121,7 +121,7 @@ def find_largest_files(files, limit=10):
     Returns a list of the largest files up to the specified limit.
     '''
 
-    pass
+    return sorted(files, key=lambda f: f["size"], reverse=True)[:limit]
 
 
 def calculate_total_size(files):
