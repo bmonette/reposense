@@ -9,6 +9,26 @@
 # - Count extensions.
 
 from pathlib import Path
+from collections import Counter
+
+
+# Directories and files to ignore by default.
+DEFAULT_IGNORE_PATTERNS = {
+    ".git", ".hg", ".svn",              # Version control directories
+    "node_modules", "venv", "env",      # Dependencies and virtual environments
+    "__pycache__",  ".pytest_cache",    # Python cache directories
+    "build", "dist",                    # Build and distribution directories
+}
+
+
+def scan_directory(path, ignore_pattern):
+
+    '''
+    Walks the folder and filters ignored paths.
+    Gathers file info and returns the collected data.
+    '''
+
+    root_directory = Path(path)
 
 
 def should_ignore(path, ignore_patterns):
@@ -29,16 +49,6 @@ def collect_file_info(file_path):
     '''
 
     pass
-
-
-def scan_directory(path, ignore_pattern):
-
-    '''
-    Walks the folder and filters ignored paths.
-    Gathers file info and returns the collected data.
-    '''
-
-    root_directory = Path(path)
 
 
 def summarize_extensions(files):
