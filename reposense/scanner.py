@@ -110,7 +110,8 @@ def summarize_extensions(files):
     Returns the most common extensions.
     '''
 
-    pass
+    counter = Counter(f["extension"] or "" for f in files)
+    return counter.most_common
 
 
 def find_largest_files(files, limit=10):
