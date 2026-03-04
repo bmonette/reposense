@@ -27,6 +27,8 @@ def scan_directory(path, ignore_pattern=None):
     '''
     Walks the folder and filters ignored paths.
     Gathers file info and returns the collected data.
+
+    Returns a list of file-info dicts (see collect_file_info).
     '''
 
     root_directory = Path(path)
@@ -61,7 +63,22 @@ def should_ignore(path, ignore_patterns):
     in the combined set of default and user-supplied patterns.
     '''
 
-    pass
+    combined = set(DEFAULT_IGNORE_PATTERNS)
+
+    if ignore_patterns:
+        # Normalise: accept Path object or plain strings.
+        combined.update(str(p) for p in ignore_patterns)
+
+    path = Path(path)
+
+    # Check every component of the path (handles nested ignored dirs)
+    for part in path.parts:
+        if part in combined:
+            return True
+
+    # Also check by suffix so callers can pass (e.g. "*.log, ".pyc")
+    if path.suffix in combined:
+        return True
 
 
 def collect_file_info(file_path):
