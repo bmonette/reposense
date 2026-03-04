@@ -22,7 +22,7 @@ DEFAULT_IGNORE_PATTERNS = {
 }
 
 
-def scan_directory(path, ignore_pattern):
+def scan_directory(path, ignore_pattern=None):
 
     '''
     Walks the folder and filters ignored paths.
@@ -31,23 +31,50 @@ def scan_directory(path, ignore_pattern):
 
     root_directory = Path(path)
 
+    if not root_directory.exists():
+        raise FileNotFoundError(f"Path '{path}' does not exist.")
+
+    if not root_directory.is_dir():
+        raise NotADirectoryError(f"Path '{path}' is not a directory.")
+
+    files = []
+
+    for item in root_directory.rglob("*"):
+        if not item.is_file():
+            continue
+
+        if should_ignore(item, ignore_patterns):
+            continue
+
+        files.append(collect_file_info(item))
+
+    return files
+
 
 def should_ignore(path, ignore_patterns):
 
     '''
     Checks if a path matches ignore rules.
-    It supports built-in ignores + user patterns.
+    It supports built-in ignores + user-supplied patterns.
+
+    A path is ignored if any part of it matches an ignore pattern
+    in the combined set of default and user-supplied patterns.
     '''
 
     pass
 
 
 def collect_file_info(file_path):
-
-    '''
+    """
     Collects file information such as size and extension.
     Returns a dictionary with the collected data.
-    '''
+
+    Keys:
+        path      - absolute Path object
+        name      - filename string
+        extension - lowercase extension including dot, e.g. '.py'
+        size      - size in bytes (int)
+    """
 
     pass
 
