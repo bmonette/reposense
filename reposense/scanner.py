@@ -18,6 +18,7 @@ DEFAULT_IGNORE_PATTERNS = {
     "node_modules", "venv", "env",      # Dependencies and virtual environments
     "__pycache__",  ".pytest_cache",    # Python cache directories
     "build", "dist",                    # Build and distribution directories
+    ".DS_Store", "Thumbs.db",           # OS metadata files
 }
 
 
