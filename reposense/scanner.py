@@ -93,6 +93,8 @@ def collect_file_info(file_path):
         size      - size in bytes (int)
     """
 
+    file_path = Path(file_path)
+
     return {
         "path": file_path.resolve(),
         "name": file_path.name,
