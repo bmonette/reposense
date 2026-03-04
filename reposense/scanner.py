@@ -131,4 +131,4 @@ def calculate_total_size(files):
     Returns the total size.
     '''
 
-    pass
+    return sum(f["size"] for f in files)
